@@ -4,7 +4,13 @@
  */
 package games;
 
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.net.URL;
+import java.util.Random;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +27,55 @@ public class Cubo extends javax.swing.JFrame {
         initComponents();
     }
     public void sorteio (){
+        Random r = new Random();
+        int sorte = r.nextInt(7);
         
+        String c = "";
+        
+        switch (sorte) {
+            case 0:
+                int sorteZero = r.nextInt(2);
+                if (sorteZero == 0) {
+                    c = "/Img/explosao3.gif";
+                    JOptionPane.showMessageDialog(null, "Você jogou o dado com força!!!");
+                }else if (sorteZero == 1) {
+                    c = "/Img/explosao2.gif";
+                    JOptionPane.showMessageDialog(null, "Você jogou o dado com força!!!");
+                }
+                break;
+            case 1:
+                c = "/Img/dado1.png";
+                break;
+            case 2:
+                c = "/Img/dado2.png";
+                break;
+            case 3:
+                c = "/Img/dado3.png";
+                break;
+            case 4:
+                c = "/Img/dado4.png";
+                break;
+            case 5:
+                c = "/Img/dado5.png";
+                break;
+            case 6:
+                c = "/Img/dado6.png";
+                break;
+            default:
+                throw new AssertionError();
+        }
+        URL url = getClass().getResource(c);
+        if (url != null) {
+            ImageIcon imagemOriginal = new ImageIcon(url);
+            Image imagem = imagemOriginal.getImage().getScaledInstance(
+                    300,
+                    300,
+                    Image.SCALE_DEFAULT);
+            jlbponto.setIcon(new ImageIcon(imagem));
+        }else{
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao lançar o dado");
+        }
+        return;
     }
 
     /**
@@ -46,7 +100,7 @@ public class Cubo extends javax.swing.JFrame {
         jbtJogar.setText("Jogar ");
         jbtJogar.addActionListener(this::jbtJogarActionPerformed);
 
-        jlbponto.setText("jLabel1");
+        jlbponto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/dice-roll-dice.gif"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -55,21 +109,20 @@ public class Cubo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jbtJogar))
+                        .addContainerGap()
+                        .addComponent(jlbponto))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jlbponto, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGap(119, 119, 119)
+                        .addComponent(jbtJogar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jlbponto, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbtJogar)
-                .addGap(16, 16, 16))
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jlbponto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtJogar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -94,7 +147,7 @@ public class Cubo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtJogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtJogarActionPerformed
-        // TODO add your handling code here:
+        sorteio();
         
         
     }//GEN-LAST:event_jbtJogarActionPerformed
