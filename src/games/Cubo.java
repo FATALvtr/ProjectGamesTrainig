@@ -28,54 +28,59 @@ public class Cubo extends javax.swing.JFrame {
     }
     public void sorteio (){
         Random r = new Random();
-        int sorte = r.nextInt(7);
-        
-        String c = "";
-        
-        switch (sorte) {
-            case 0:
-                int sorteZero = r.nextInt(2);
-                if (sorteZero == 0) {
-                    c = "/Img/explosao3.gif";
-                    JOptionPane.showMessageDialog(null, "Você jogou o dado com força!!!");
-                }else if (sorteZero == 1) {
-                    c = "/Img/explosao2.gif";
-                    JOptionPane.showMessageDialog(null, "Você jogou o dado com força!!!");
-                }
-                break;
-            case 1:
-                c = "/Img/dado1.png";
-                break;
-            case 2:
-                c = "/Img/dado2.png";
-                break;
-            case 3:
-                c = "/Img/dado3.png";
-                break;
-            case 4:
-                c = "/Img/dado4.png";
-                break;
-            case 5:
-                c = "/Img/dado5.png";
-                break;
-            case 6:
-                c = "/Img/dado6.png";
-                break;
-            default:
-                throw new AssertionError();
+        try {
+            int sorte = r.nextInt(7);
+
+            String c = "";
+
+            switch (sorte) {
+                case 0:
+                    int sorteZero = r.nextInt(2);
+                    if (sorteZero == 0) {
+                        c = "/Img/explosao3.gif";
+                        JOptionPane.showMessageDialog(null, "Você jogou o dado com força!!!");
+                    }else if (sorteZero == 1) {
+                        c = "/Img/explosao2.gif";
+                        JOptionPane.showMessageDialog(null, "Você jogou o dado com força!!!");
+                    }
+                    break;
+                case 1:
+                    c = "/Img/dado1.png";
+                    break;
+                case 2:
+                    c = "/Img/dado2.png";
+                    break;
+                case 3:
+                    c = "/Img/dado3.png";
+                    break;
+                case 4:
+                    c = "/Img/dado4.png";
+                    break;
+                case 5:
+                    c = "/Img/dado5.png";
+                    break;
+                case 6:
+                    c = "/Img/dado6.png";
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            URL url = getClass().getResource(c);
+            if (url != null) {
+                ImageIcon imagemOriginal = new ImageIcon(url);
+                Image imagem = imagemOriginal.getImage().getScaledInstance(
+                        300,
+                        300,
+                        Image.SCALE_DEFAULT);
+                jlbponto.setIcon(new ImageIcon(imagem));
+            }else{
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro ao lançar o dado!");
+            }
+            return;
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao lançar o dado!");
         }
-        URL url = getClass().getResource(c);
-        if (url != null) {
-            ImageIcon imagemOriginal = new ImageIcon(url);
-            Image imagem = imagemOriginal.getImage().getScaledInstance(
-                    300,
-                    300,
-                    Image.SCALE_DEFAULT);
-            jlbponto.setIcon(new ImageIcon(imagem));
-        }else{
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao lançar o dado");
-        }
-        return;
     }
 
     /**
